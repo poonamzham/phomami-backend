@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: express-app-builder-pipeline-run-
+spec:
+  pipelineRef:
+    name: nodejs-pipeline
+  params:
+    - name: source-repo
+      value: https://github.com/cloud-native-garage-method-cohort/poonam-express-app.git
+    - name: image-repo
+      value: quay.io/poonamzham0/test
+    - name: app-name
+      value: poonam-express-sample-app
+  serviceAccountName: build-bot
+  workspaces:
+    - name: pipeline-shared-data
+      persistentvolumeclaim:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi

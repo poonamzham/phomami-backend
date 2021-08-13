@@ -1,0 +1,18 @@
+apiVersion: v1
+imagePullSecrets:
+- name: build-bot-dockercfg-ndcmv
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","imagePullSecrets":[{"name":"build-bot-dockercfg-ndcmv"}],"kind":"ServiceAccount","metadata":{"annotations":{},"creationTimestamp":"2021-08-12T00:40:55Z","name":"build-bot","namespace":"poonam-express-sample-app","resourceVersion":"7744282","selfLink":"/api/v1/namespaces/poonam-express-sample-app/serviceaccounts/build-bot","uid":"e0086956-f90c-4409-bc4b-cc1a0623eace"},"secrets":[{"name":"build-bot-token-zw9lp"},{"name":"build-bot-dockercfg-ndcmv"},{"name":"quay-io-credentials"}]}
+  creationTimestamp: "2021-08-12T00:40:55Z"
+  name: build-bot
+  namespace: poonam-express-sample-app
+  resourceVersion: "7753361"
+  selfLink: /api/v1/namespaces/poonam-express-sample-app/serviceaccounts/build-bot
+  uid: e0086956-f90c-4409-bc4b-cc1a0623eace
+secrets:
+- name: build-bot-token-zw9lp
+- name: build-bot-dockercfg-ndcmv
+- name: quay-io-credentials

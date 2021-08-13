@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: f7580aa1eb6f7176705176e201ecff4de93edafb
+    app.openshift.io/vcs-uri: https://github.com/poonamzham/phomami-backend
+  labels:
+    app: pohemami-backend
+    app.kubernetes.io/instance: pohemami-backend-instance
+    app.kubernetes.io/name: pohemami-backend
+    app.openshift.io/runtime: js
+  name: pohemami-backend
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: pohemami-backend-instance
+      app.kubernetes.io/name: pohemami-backend
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: pohemami-backend-instance
+        app.kubernetes.io/name: pohemami-backend
+    spec:
+      containers:
+        - env:
+            - name: INGRESS_HOST
+            - name: PROTOCOLS
+            - name: LOG_LEVEL
+              value: debug
+          image: quay.io/jeffdean/express-sample-app
+          imagePullPolicy: IfNotPresent
+          name: pohemami-backend
+          ports:
+            - containerPort: 80   # Not sure if I need to change this to 80 because files are being served by Nginx or leave it at 3000.
+              name: http
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
